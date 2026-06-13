@@ -1,0 +1,10 @@
+{
+  "name": "Pixel Upsampler Template",
+  "version": "0.1.0",
+  "description": "Template spatial upsampler plugin that duplicates pixels and documents the WanGP upsampler API for plugin developers.",
+  "author": "DeepBeepMeep",
+  "type": "spatial_upsampler",
+  "spatial_upsampler_handlers": [".upsampler.PixelDuplicateUpsampler"],
+  "wan2gp_version": ""
+}
+
