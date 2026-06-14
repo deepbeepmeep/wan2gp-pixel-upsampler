@@ -10,14 +10,15 @@ the upsampler from `plugin_info.json`:
 
 ```json
 {
-  "type": "spatial_upsampler",
+  "type": "processor",
   "spatial_upsampler_handlers": [".upsampler.PixelDuplicateUpsampler"]
 }
 ```
 
-Relative handler paths are resolved from the plugin package root. The entry above
-loads `plugins/wan2gp-pixel-upsampler/upsampler.py` and instantiates
-`PixelDuplicateUpsampler(server_config, files_locator)`.
+`processor` is the Plugin Manager category for processing extensions such as
+spatial upsamplers. Relative handler paths are resolved from the plugin package
+root. The entry above loads `plugins/wan2gp-pixel-upsampler/upsampler.py` and
+instantiates `PixelDuplicateUpsampler(server_config, files_locator)`.
 
 ## Files
 
