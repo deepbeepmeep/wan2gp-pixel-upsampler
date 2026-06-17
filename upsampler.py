@@ -4,7 +4,7 @@ from typing import Any
 
 import torch
 
-from postprocessing.upsamplers import SimpleScaleSuffixMixin, UPSAMPLER_PROFILE_VIDEO, UPSAMPLER_TYPE_POSTPROCESSING
+from postprocessing.spatial_upsamplers import SimpleScaleSuffixMixin, UPSAMPLER_PROFILE_VIDEO, UPSAMPLER_TYPE_POSTPROCESSING
 
 
 def duplicate_pixels(sample: torch.Tensor, scale: int) -> torch.Tensor:
