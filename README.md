@@ -1,4 +1,4 @@
-# Pixel Upsampler Template
+# Spatial Pixel Duplicate
 
 This plugin is a reference implementation for WanGP spatial upsampler plugins. It
 adds a simple post-processing upsampler named **Pixel Duplicate**. The upsampler
@@ -31,9 +31,12 @@ instantiates `PixelDuplicateUpsampler(server_config, files_locator)`.
 `PixelDuplicateUpsampler` demonstrates the core post-processing upsampler surface:
 
 - Inherit `SimpleScaleSuffixMixin` when your serialized values follow the common
-  `<method><scale>` convention, for example `pixel2` or `pixel4`.
+  `<method>*<scale>` convention, for example `pixel*2` or `pixel*4`. The parser
+  still accepts the former concatenated syntax, while newly built values use `*`.
 - Implement `query_upsampler_def()` to declare display labels, method ids,
-  supported media, supported multipliers, dropdown ordering, and the config key.
+  supported media, supported multipliers, dropdown ordering, the config key,
+  and a concise `description` shown by WanGP's Spatial Upsampling information
+  button.
 - Implement `validate_upsampling(...)` to return an empty string when the selection
   is valid, or a user-facing error message when it is not.
 - Implement `upscale(...)` and return `(output_tensor, continue_cache)`. Most
@@ -67,10 +70,10 @@ the input layout except for the spatial size.
 
 The method id is `pixel`, so the UI stores values such as:
 
-- `pixel1`
-- `pixel2`
-- `pixel3`
-- `pixel4`
+- `pixel*1`
+- `pixel*2`
+- `pixel*3`
+- `pixel*4`
 
 The method id must be multiplier-free in `methods`, `method_pos`, and
 `multipliers`. Only serialized selections contain the multiplier suffix.
@@ -133,7 +136,7 @@ sys.path.insert(0, "plugins")
 module = importlib.import_module("wan2gp-pixel-upsampler.upsampler")
 handler = module.PixelDuplicateUpsampler({}, None)
 sample = torch.arange(1 * 1 * 2 * 3).reshape(1, 1, 2, 3)
-output, cache = handler.upscale(sample, "pixel2")
+output, cache = handler.upscale(sample, "pixel*2")
 assert output.shape == (1, 1, 4, 6)
 assert cache is None
 ```

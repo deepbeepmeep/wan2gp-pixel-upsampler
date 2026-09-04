@@ -40,7 +40,7 @@ class PixelDuplicateUpsampler(SimpleScaleSuffixMixin):
     @classmethod
     def query_upsampler_def(cls) -> dict[str, Any]:
         return {
-            "name": "Pixel Upsampler Template",
+            "name": "Spatial Pixel Duplicate",
             "upsampler_types": (UPSAMPLER_TYPE_POSTPROCESSING,),
             "media": ("video", "image"),
             "profile": UPSAMPLER_PROFILE_VIDEO,
@@ -50,7 +50,8 @@ class PixelDuplicateUpsampler(SimpleScaleSuffixMixin):
             "methods": [("Pixel Duplicate", cls.METHOD)],
             "vae_methods": [],
             "multipliers": {cls.METHOD: cls.MULTIPLIERS},
-            "default_spatial_upsampling": "pixel2",
+            "default_spatial_upsampling": "pixel*2",
+            "description": "Fast model-free nearest-neighbor scaling that repeats source pixels exactly. It adds no detail and looks blocky on natural media; it is intended for pixel art, testing, and API reference use.",
         }
 
     def validate_upsampling(self, spatial_upsampling, image_mode: int) -> str:
